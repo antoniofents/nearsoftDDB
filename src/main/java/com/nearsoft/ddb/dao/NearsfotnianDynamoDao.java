@@ -17,11 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class NearsfotnianDaoDynamo implements NearsoftnianDao {
+public class NearsfotnianDynamoDao implements NearsoftnianDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(NearsfotnianDaoDynamo.class);
+    private static final Logger logger = LoggerFactory.getLogger(NearsfotnianDynamoDao.class);
 
-    public NearsfotnianDaoDynamo(String tableName) {
+    public NearsfotnianDynamoDao(String tableName) {
         this.tableName = tableName;
     }
 
@@ -48,6 +48,7 @@ public class NearsfotnianDaoDynamo implements NearsoftnianDao {
             return getTableInstance().getItem(spec).toJSON();
         } catch (Exception e) {
             logger.error("unable to search for item");
+            logger.error(e.getMessage());
             return null;
         }
 
