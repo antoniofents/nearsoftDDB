@@ -3,10 +3,7 @@ package com.nearsoft.ddb.controller;
 import com.nearsoft.ddb.com.nearsoft.ddb.model.Nearsoftnian;
 import com.nearsoft.ddb.dao.NearsoftnianDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/nearsoftnian")
@@ -37,8 +34,8 @@ public class NearsoftniansController {
          return nearsoftnianDao.delete(id)?"SUCCESS":"ERROR";
     }
 
-    @RequestMapping(value = "/save/{nearsoftnian}", method = RequestMethod.POST)
-    public String saveOrUpdateNearsoftnian(@PathVariable String nearsoftnian) {
+    @PostMapping(value = "/save/")
+    public String saveOrUpdateNearsoftnian(@RequestBody String nearsoftnian) {
         //post must receive a value not a field
         return nearsoftnianDao.saveOrUpdate(new Nearsoftnian(nearsoftnian))?"SUCCESS":"ERROR";
     }

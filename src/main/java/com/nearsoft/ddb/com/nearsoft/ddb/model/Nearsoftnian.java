@@ -12,7 +12,6 @@ public class Nearsoftnian {
 
         this.id = ns.get("id_ns").getAsString();
         this.mail = ns.get("mail").getAsString();
-        ;
         JsonElement desknumber = ns.get("desknumber");
         this.deskNumber = desknumber != null ? desknumber.getAsInt() : 0;
         JsonElement technology = ns.get("technology");
