@@ -68,7 +68,6 @@ public class DynamoLocalSetup {
         try {
             System.out.println("Attempting to read the item...");
             Item outcome = table.getItem(spec);
-            Item outcome2 = table.getItem(spec2);
             System.out.println("GetItem succeeded: " + outcome);
 
         } catch (Exception e) {

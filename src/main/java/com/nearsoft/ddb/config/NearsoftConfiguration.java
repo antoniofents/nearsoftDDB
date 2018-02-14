@@ -24,9 +24,8 @@ public class NearsoftConfiguration {
     @Bean("dynamoClient")
     @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public AmazonDynamoDB dynamoDb(){
-        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+        return AmazonDynamoDBClientBuilder.standard()
                 .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-west-2"))
                 .build();
-        return client;
     }
 }
