@@ -11,11 +11,19 @@ public class Nearsoftnian {
         JsonObject ns = new Gson().fromJson(json, JsonObject.class);
 
         this.id = ns.get("id_ns").getAsString();
-        this.mail = ns.get("mail").getAsString();
+        JsonElement jMail = ns.get("mail");
+        this.mail = jMail != null ? jMail.getAsString() : null;
         JsonElement desknumber = ns.get("desknumber");
         this.deskNumber = desknumber != null ? desknumber.getAsInt() : 0;
-        JsonElement technology = ns.get("technology");
-        this.technology = technology != null ? technology.getAsString() : null;
+        JsonElement jTechnology = ns.get("technology");
+        this.technology = jTechnology != null ? jTechnology.getAsString() : null;
+    }
+
+    public Nearsoftnian(String id, String mail, String technology, int desknumber){
+        this.id=id;
+        this.mail=mail;
+        this.technology=technology;
+        this.deskNumber=desknumber;
     }
 
     private String id;

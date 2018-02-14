@@ -15,12 +15,11 @@ public class NearsoftniansController {
 
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public String getNearsoftnians() {
-        return "nearsoftnians";
+        return nearsoftnianDao.getNearsoftnians().toString();
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public String getNearsoftnianById(@PathVariable String id) {
-
         return nearsoftnianDao.getNearsoftnianById(id);
     }
 
@@ -36,7 +35,6 @@ public class NearsoftniansController {
 
     @PostMapping(value = "/save/")
     public String saveOrUpdateNearsoftnian(@RequestBody String nearsoftnian) {
-        //post must receive a value not a field
         return nearsoftnianDao.saveOrUpdate(new Nearsoftnian(nearsoftnian))?"SUCCESS":"ERROR";
     }
 
