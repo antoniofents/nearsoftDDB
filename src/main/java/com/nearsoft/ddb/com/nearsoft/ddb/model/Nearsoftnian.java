@@ -1,23 +1,12 @@
 package com.nearsoft.ddb.com.nearsoft.ddb.model;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.annotations.SerializedName;
 
 public class Nearsoftnian {
 
 
-    public Nearsoftnian(String json) {
-        JsonObject ns = new Gson().fromJson(json, JsonObject.class);
 
-        this.id = ns.get("id_ns").getAsString();
-        JsonElement jMail = ns.get("mail");
-        this.mail = jMail != null ? jMail.getAsString() : null;
-        JsonElement desknumber = ns.get("desknumber");
-        this.deskNumber = desknumber != null ? desknumber.getAsInt() : 0;
-        JsonElement jTechnology = ns.get("technology");
-        this.technology = jTechnology != null ? jTechnology.getAsString() : null;
-    }
 
     public Nearsoftnian(String id, String mail, String technology, int desknumber){
         this.id=id;
@@ -26,6 +15,7 @@ public class Nearsoftnian {
         this.deskNumber=desknumber;
     }
 
+    @SerializedName(value="id_ns", alternate={"id"})
     private String id;
     private String mail;
 

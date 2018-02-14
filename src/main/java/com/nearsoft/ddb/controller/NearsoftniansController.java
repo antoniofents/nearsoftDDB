@@ -1,6 +1,6 @@
 package com.nearsoft.ddb.controller;
 
-import com.nearsoft.ddb.com.nearsoft.ddb.model.Nearsoftnian;
+import com.nearsoft.ddb.NearsoftnianUtil;
 import com.nearsoft.ddb.dao.NearsoftnianDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class NearsoftniansController {
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
     public String getNearsoftnianById(@PathVariable String id) {
-        return nearsoftnianDao.getNearsoftnianById(id);
+        return nearsoftnianDao.getNearsoftnianById(id).toString();
     }
 
     @RequestMapping(value = "/getByMail/{email}", method = RequestMethod.GET)
@@ -35,7 +35,7 @@ public class NearsoftniansController {
 
     @PostMapping(value = "/save/")
     public String saveOrUpdateNearsoftnian(@RequestBody String nearsoftnian) {
-        return nearsoftnianDao.saveOrUpdate(new Nearsoftnian(nearsoftnian))?"SUCCESS":"ERROR";
+        return nearsoftnianDao.saveOrUpdate(NearsoftnianUtil.getNearsoftnianFromJson(nearsoftnian))?"SUCCESS":"ERROR";
     }
 
 

@@ -8,7 +8,7 @@ public interface NearsoftnianDao {
 
 
      List<Nearsoftnian> getNearsoftnians();
-     String getNearsoftnianById(String id);
+     Nearsoftnian getNearsoftnianById(String id);
      List <Nearsoftnian> findNearsoftniansByEmail(String id);
      boolean saveOrUpdate(Nearsoftnian nearsoftnian);
      boolean update(Nearsoftnian nearsoftnian);
