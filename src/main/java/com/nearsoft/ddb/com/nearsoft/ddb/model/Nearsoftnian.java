@@ -6,16 +6,18 @@ import com.google.gson.annotations.SerializedName;
 public class Nearsoftnian {
 
 
+    public Nearsoftnian() {
 
-
-    public Nearsoftnian(String id, String mail, String technology, int desknumber){
-        this.id=id;
-        this.mail=mail;
-        this.technology=technology;
-        this.deskNumber=desknumber;
     }
 
-    @SerializedName(value="id_ns", alternate={"id"})
+    public Nearsoftnian(String id, String mail, String technology, int desknumber) {
+        this.id = id;
+        this.mail = mail;
+        this.technology = technology;
+        this.deskNumber = desknumber;
+    }
+
+    @SerializedName(value = "id_ns", alternate = {"id"})
     private String id;
     private String mail;
 

@@ -44,24 +44,25 @@ public class NearsfotnianDynamoDao implements NearsoftnianDao {
         List<Nearsoftnian> nearsoftnians = new ArrayList();
 
         ScanResult result = null;
+
         ScanRequest req = new ScanRequest();
         req.setTableName(tableName);
+        result = dynamoClient.scan(req);
         req.setExclusiveStartKey(result.getLastEvaluatedKey());
-        do {
-            result = dynamoClient.scan(req);
-            List<Map<String, AttributeValue>> rows = result.getItems();
 
-            for (Map<String, AttributeValue> map : rows) {
-                try {
-                    AttributeValue technology = map.get("technology");
-                    AttributeValue desknumber = map.get("desknumber");
-                    nearsoftnians.add(new Nearsoftnian(map.get("id_ns").getS(), map.get("mail").getS(), technology != null ? technology.getS() : null, desknumber != null ? Integer.parseInt(desknumber.getN()) : 0));
 
-                } catch (NumberFormatException e) {
-                    System.out.println(e.getMessage());
-                }
+        List<Map<String, AttributeValue>> rows = result.getItems();
+
+        for (Map<String, AttributeValue> map : rows) {
+            try {
+                AttributeValue technology = map.get("technology");
+                AttributeValue desknumber = map.get("desknumber");
+                nearsoftnians.add(new Nearsoftnian(map.get("id_ns").getS(), map.get("mail").getS(), technology != null ? technology.getS() : null, desknumber != null ? Integer.parseInt(desknumber.getN()) : 0));
+
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
             }
-        } while (result.getLastEvaluatedKey() != null);
+        }
 
 
         return nearsoftnians;
@@ -73,6 +74,7 @@ public class NearsfotnianDynamoDao implements NearsoftnianDao {
         GetItemSpec spec = new GetItemSpec().withPrimaryKey(getPrimaryKey(id));
         try {
             logger.error("getting nearsoftnian");
+            logger.error("*****************************************"+System.getenv("AWS_CREDENTIAL_PROFILES_FILE"));
             Item item = getTableInstance().getItem(spec);
             return item != null ? NearsoftnianUtil.getNearsoftnianFromJson(item.toJSON()) : null;
         } catch (Exception e) {
